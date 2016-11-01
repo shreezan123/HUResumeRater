@@ -1,0 +1,98 @@
+<!DOCTYPE HTML>
+<html>
+
+  <head>
+    <title>Appdesign</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <link rel="stylesheet" type="text/css" href="text.css">
+    <!--script src="new.js" type="text/javascript"></script-->
+  </head>
+
+  <body bgcolor="#FFFFFF" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+    <div class="form-group">
+      <label for="info"></label>
+      <textarea class="form-control1" placeholder = "Please enter your name, address, phone number and email address in this field" rows="5" id="info"></textarea>
+      <label for="education"></label>
+      <textarea class="form-control2" placeholder = "Please enter your University name, GPA, expected graduation date and courses taken each in new lines" rows="5" id="education"></textarea>
+      <label for="achievements"></label>
+      <textarea class="form-control3" placeholder = "Please enter your contribution to your past/ ongoing workplace so that we can assess how much quantifiable achievement have you made for the company" rows="5" id="achievements"></textarea>
+      <label for="projects"></label>
+      <textarea class="form-control4" placeholder = "Please mention all the projects that you have worked on" rows="5" id="projects"></textarea>
+  	</div>
+    <img src="http://i.imgur.com/iklXXDz.gif" width="2000px" height="3000px" alt="Image not loaded">
+    <button class="rate-button" id="button" onclick="myFunction()">Rate your resume</button>
+
+  </body>
+  <script>
+  	function myFunction() {
+	var rating = 100;
+	//var myWindow = window.open("", "MsgWindow", "width=200,height=100");
+    //document.write('<p><img src="http://i.imgur.com/BvB959w.gif" width="200px" height="300px" alt="Image not loaded"></p>');
+	var education = document.getElementById("education");
+	var firstarray = education.value.split("\n");
+
+
+	var check_it = firstarray[1];
+	if (check_it > 3.0 && check_it < 3.5){
+		rating -= 5;
+		var a1 = "5% of your resume points are deducted because your GPA is less than 3.5";
+	}
+	else if (check_it < 3.0){
+
+		rating -= 10;
+		var a1 = "10% of your resume points are deducted because your GPA is less than 3.0";
+	}
+	else {
+		var a1 = '';
+	}
+
+	var achievements = document.getElementById("achievements");
+	var secondarrays = achievements.value.split(" ");
+	var count_percent = 0;
+	var count_num = 0;
+	for (var each_word in secondarrays ) {
+
+		if (!isNaN(secondarrays[each_word]) ){
+
+			count_num += 1;
+
+		}
+
+		if (secondarrays[each_word] === "%"){
+			
+			count_percent = count_percent + 1;
+		}
+	}
+	if (count_num < 1){
+		var a2 = "The achievement portion of the resume should be quantifiable. So, please include the increase in the revenue because of your work on behalf of the company. 10% is deducted off the resume points as a result.";
+
+		rating -=10;
+	}
+	else {
+		var a2 = '';
+	}
+	if (count_percent < 1){
+		var a3 = "The achievement portion of the resume should be quantifiable. So, please include the increase in terms of % because of your work on behalf of the company. 10% is deducted off the resume points as a result.";
+		rating -= 10;
+	}
+	else {
+		var a3 = '';
+	}
+
+	var projects = document.getElementById("projects");
+	var thirdarrays = projects.value.split("\n");
+
+	if (thirdarrays.length === 1) {
+		rating -= 20;
+	}
+
+	alert('Your resume rating = ' + rating + '\n' + a1 + '\n' + a2 + '\n' + a3);
+};
+
+
+	</script>
+
+	
+
+
+</html>
